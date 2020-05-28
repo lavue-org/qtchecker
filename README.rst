@@ -13,7 +13,7 @@ This is a simple helper module to perform PyQt GUI tests.
 |
 
 
-With the qtchecker tests its user
+With the ``qtchecker`` module its user
 
 1. creates ``QtChecker`` object  with the global QApplication object and a given tested QWidget dialog parameters
 2. defines a sequence of checks with ``setChecks()`` method and the following helper classes:
