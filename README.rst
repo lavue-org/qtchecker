@@ -31,6 +31,8 @@ for example
     from PyQt5 import QtCore
     from PyQt5 import QtTest
 
+    from qtchecker import qtChecker
+
     # QApplication object should be one for all tess
     app = QtGui.QApplication([])
 
@@ -41,17 +43,17 @@ for example
         dialog.show()
 
 	# create QtChecker object
-	qtck = qtchecker.QtChecker(app, dialog)
+	qtck = qtChecker.QtChecker(app, dialog)
 
 	# define a sequence of action of the dialog
         qtck.setChecks([
 	    # read return value of execute isConnected command
-            qtchecker.CmdCheck(
+            qtChecker.CmdCheck(
 	        # a python path to a method executed in the first action
 	        "_MainWindow__lavue._LiveViewer__sourcewg.isConnected"
             ),
 	    # click pushButton with the left-mouse-click
-	    qtchecker.WrapAttrCheck(
+	    qtChecker.WrapAttrCheck(
 	        # a python path to an pushButton object
 	        "_MainWindow__lavue._LiveViewer__sourcewg._SourceTabWidget__sourcetabs[],0._ui.pushButton",
 		# Wrapper command to be executed on the action object
@@ -60,7 +62,7 @@ for example
 		[QtCore.Qt.LeftButton]
 	    ),
 	    # click pushButton with the left-mouse-click
-	    qtchecker.ExtCmdCheck(
+	    qtChecker.ExtCmdCheck(
                 # parent object of an external method
 		self,
 		# external method name
