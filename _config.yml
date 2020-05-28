@@ -1,0 +1,6 @@
+# Site settings
+title: qtchecker
+email: jan.kotanski@desy.de
+description: "qtchecker"
+
+include: ['_sources', '_static']
