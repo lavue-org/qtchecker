@@ -20,7 +20,6 @@ In the qtchecker tests user
 - ```ExtAttrCheck``` - read an external attribute value defined outside the dialog
 - ```ExtCmdCheck``` - execute an external command defined outside the dialog and read its result value
   
-classes
 3. starts event loop and performs checkes with ```executeChecks()``` or  ```executeChecksAndClose()``` method
 4. compare results by reading ```results``` attribute of executing
 
