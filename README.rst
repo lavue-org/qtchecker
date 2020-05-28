@@ -7,7 +7,45 @@ Introduction
 ------------
 
 This is a simple helper module to perform PyQt GUI tests.
+In the qtchecker tests the user
+1. creates ```QtChecker``` object  with global QApplication object and tested QWidget object parameters
+2. defines a sequence of checks with ``setChecks()``` method and ```CmdCheck```, ```AttrCheck```  ```WrapCmdCheck```, ```WrapAttrCheck``` classes
+3. starts event loop and performs checkes with ```executeChecks()``` or  ```executeChecksAndClose()``` method
+4. compare results by reading ```results``` attribute of executing 
 
+
+.. code-block:: python
+:emphasize-lines: 3,5
+
+
+    from PyQt5 import QtGui
+    from PyQt5 import QtCore
+    from .Qt import QtTest
+ 		  
+    # QApplication object should be one for all tess 		  
+    app = QtGui.QApplication([])		  
+		  
+    def test_run(self):
+
+        # my tested dialog
+        dialog = MyMainWindow()
+        dialog.show()
+	qtck = qtchecker.QtChecker(app, dialog)
+
+	# define a sequence of action of the dialog 
+        qtck.setChecks([
+            qtchecker.CmdCheck("_MainWindow__lavue._LiveViewer__sourcewg.isConnected"),
+	    qtchecker.WrapAttrCheck(
+	        "_MainWindow__lavue._LiveViewer__sourcewg._SourceTabWidget__sourcetabs[],0._ui.pushButton",
+		QtTest.QTest.mouseClick, [QtCore.Qt.LeftButton]),
+	])
+
+	# execute the check actions
+	status = qtck.executeChecksAndClose()
+	self.assertEqual(status, 0)
+
+        # compare results returned by each action
+	qtck.compareResults(self, [True, None])
 
 Installation
 ------------
