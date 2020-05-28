@@ -8,6 +8,9 @@ Introduction
 
 This is a simple helper module to perform PyQt GUI tests.
 
+| Source code: https://github.com/jkotan/qtchecker
+| Project Web page: https://jkotan.github.io/qtchecker
+
 With the qtchecker tests its user
 
 1. creates ``QtChecker`` object  with the global QApplication object and a given tested QWidget dialog parameters
