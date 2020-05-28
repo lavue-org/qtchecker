@@ -7,24 +7,24 @@ Introduction
 ------------
 
 This is a simple helper module to perform PyQt GUI tests.
+
 In the qtchecker tests the user
+
 1. creates ```QtChecker``` object  with global QApplication object and tested QWidget object parameters
 2. defines a sequence of checks with ``setChecks()``` method and ```CmdCheck```, ```AttrCheck```  ```WrapCmdCheck```, ```WrapAttrCheck``` classes
 3. starts event loop and performs checkes with ```executeChecks()``` or  ```executeChecksAndClose()``` method
-4. compare results by reading ```results``` attribute of executing 
+4. compare results by reading ```results``` attribute of executing
 
 
 .. code-block:: python
-:emphasize-lines: 3,5
-
 
     from PyQt5 import QtGui
     from PyQt5 import QtCore
     from .Qt import QtTest
- 		  
-    # QApplication object should be one for all tess 		  
-    app = QtGui.QApplication([])		  
-		  
+
+    # QApplication object should be one for all tess
+    app = QtGui.QApplication([])
+
     def test_run(self):
 
         # my tested dialog
@@ -32,7 +32,7 @@ In the qtchecker tests the user
         dialog.show()
 	qtck = qtchecker.QtChecker(app, dialog)
 
-	# define a sequence of action of the dialog 
+	# define a sequence of action of the dialog
         qtck.setChecks([
             qtchecker.CmdCheck("_MainWindow__lavue._LiveViewer__sourcewg.isConnected"),
 	    qtchecker.WrapAttrCheck(
@@ -46,6 +46,7 @@ In the qtchecker tests the user
 
         # compare results returned by each action
 	qtck.compareResults(self, [True, None])
+
 
 Installation
 ------------
@@ -128,8 +129,7 @@ To install it from pip you need to install pyqt5 in advance, e.g.
 
    $ python3 -m venv myvenv
    $ . myvenv/bin/activate
-   
-   $ pip install pyqt5
-   
-   $ pip install qtchecker
 
+   $ pip install pyqt5
+
+   $ pip install qtchecker
