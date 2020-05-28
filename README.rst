@@ -8,36 +8,63 @@ Introduction
 
 This is a simple helper module to perform PyQt GUI tests.
 
-In the qtchecker tests the user
+In the qtchecker tests user
 
-1. creates ```QtChecker``` object  with global QApplication object and tested QWidget object parameters
-2. defines a sequence of checks with ``setChecks()``` method and ```CmdCheck```, ```AttrCheck```  ```WrapCmdCheck```, ```WrapAttrCheck``` classes
+1. creates ```QtChecker``` object  with the global QApplication object and a given tested QWidget dialog parameters
+2. defines a sequence of checks with ``setChecks()``` method and the following helper classes:
+   - ```AttrCheck```  - read a tested dialog attribute value
+   - ```CmdCheck``` - execute a tested dialog command and read its result value
+   - ```WrapAttrCheck``` - execute a wrapper command on a tested dialog attribute
+   - ```WrapCmdCheck``` - execute a wrapper command on a result value of a tested dialog command
+   - ```ExtAttrCheck``` - read an external attribute value defined outside the dialog 
+   - ```ExtCmdCheck``` - execute an external command defined outside the dialog and read its result value
+classes
 3. starts event loop and performs checkes with ```executeChecks()``` or  ```executeChecksAndClose()``` method
 4. compare results by reading ```results``` attribute of executing
 
+for example   
 
 .. code-block:: python
 
     from PyQt5 import QtGui
     from PyQt5 import QtCore
-    from .Qt import QtTest
+    from PyQt5 import QtTest
 
     # QApplication object should be one for all tess
     app = QtGui.QApplication([])
 
     def test_run(self):
 
-        # my tested dialog
-        dialog = MyMainWindow()
+        # my tested MainWindow dialog
+        dialog = MainWindow()
         dialog.show()
+
+	# create QtChecker object
 	qtck = qtchecker.QtChecker(app, dialog)
 
 	# define a sequence of action of the dialog
         qtck.setChecks([
-            qtchecker.CmdCheck("_MainWindow__lavue._LiveViewer__sourcewg.isConnected"),
+	    # read return value of execute isConnected command
+            qtchecker.CmdCheck(
+	        # a python path to a method executed in the first action 
+	        "_MainWindow__lavue._LiveViewer__sourcewg.isConnected"
+            ),
+	    # click pushButton with the left-mouse-click
 	    qtchecker.WrapAttrCheck(
+	        # a python path to an pushButton object
 	        "_MainWindow__lavue._LiveViewer__sourcewg._SourceTabWidget__sourcetabs[],0._ui.pushButton",
-		QtTest.QTest.mouseClick, [QtCore.Qt.LeftButton]),
+		# Wrapper command to be executed on the action object
+		QtTest.QTest.mouseClick,
+		# additional parameters of the wrapper command
+		[QtCore.Qt.LeftButton]
+	    ),
+	    # click pushButton with the left-mouse-click
+	    qtchecker.ExtCmdCheck(
+                # parent object of an external method
+		self,
+		# external method name
+		"getLavueState"
+	    ),
 	])
 
 	# execute the check actions
@@ -45,9 +72,17 @@ In the qtchecker tests the user
 	self.assertEqual(status, 0)
 
         # compare results returned by each action
-	qtck.compareResults(self, [True, None])
+	qtck.compareResults(self,
+	    [
+	        True,
+		None,
+		'{"connected": false}'
+            ]
+	)
 
-
+More examples can be found at like `LavueTests
+<https://github.com/jkotan/lavue/blob/develop/test/CommandLineLavueState_test.py/>`_.
+	
 Installation
 ------------
 
