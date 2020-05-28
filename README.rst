@@ -10,18 +10,18 @@ This is a simple helper module to perform PyQt GUI tests.
 
 With the qtchecker tests its user
 
-1. creates ```QtChecker``` object  with the global QApplication object and a given tested QWidget dialog parameters
-2. defines a sequence of checks with ``setChecks()``` method and the following helper classes:
+1. creates ``QtChecker`` object  with the global QApplication object and a given tested QWidget dialog parameters
+2. defines a sequence of checks with ``setChecks()`` method and the following helper classes:
    
-- ```AttrCheck```  - read a tested dialog attribute value
-- ```CmdCheck``` - execute a tested dialog command and read its result value
-- ```WrapAttrCheck``` - execute a wrapper command on a tested dialog attribute
-- ```WrapCmdCheck``` - execute a wrapper command on a result value of a tested dialog command
-- ```ExtAttrCheck``` - read an external attribute value defined outside the dialog
-- ```ExtCmdCheck``` - execute an external command defined outside the dialog and read its result value
+- ``AttrCheck``  - read a tested dialog attribute value
+- ``CmdCheck`` - execute a tested dialog command and read its result value
+- ``WrapAttrCheck`` - execute a wrapper command on a tested dialog attribute
+- ``WrapCmdCheck`` - execute a wrapper command on a result value of a tested dialog command
+- ``ExtAttrCheck`` - read an external attribute value defined outside the dialog
+- ``ExtCmdCheck`` - execute an external command defined outside the dialog and read its result value
   
-3. starts event loop and performs checkes with ```executeChecks()``` or  ```executeChecksAndClose()``` method
-4. compare results by reading ```results``` attribute of executing
+3. starts event loop and performs checkes with ``executeChecks()`` or  ``executeChecksAndClose()`` method
+4. compare results by reading ``results`` attribute of executing
 
 for example
 
@@ -82,7 +82,7 @@ for example
 		),
 	    ])
 
-	    # execute the check actions
+	    # execute the check actions and close the dialog
 	    status = qtck.executeChecksAndClose()
 	    self.assertEqual(status, 0)
 
@@ -129,7 +129,7 @@ Extract sources and run
 
    $ python setup.py install
 
-The ``setup.py`` script may need: ``setuptools  sphinx  numpy  pytest`` python packages as well as ``qtbase5-dev-tools`` or ``libqt4-dev-bin``.
+The ``setup.py`` script may need: ``setuptools  sphinx`` python packages as well as ``qtbase5-dev-tools`` or ``libqt4-dev-bin``.
 
 Debian packages
 """""""""""""""
