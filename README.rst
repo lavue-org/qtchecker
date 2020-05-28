@@ -12,17 +12,19 @@ In the qtchecker tests user
 
 1. creates ```QtChecker``` object  with the global QApplication object and a given tested QWidget dialog parameters
 2. defines a sequence of checks with ``setChecks()``` method and the following helper classes:
+   
 - ```AttrCheck```  - read a tested dialog attribute value
 - ```CmdCheck``` - execute a tested dialog command and read its result value
 - ```WrapAttrCheck``` - execute a wrapper command on a tested dialog attribute
 - ```WrapCmdCheck``` - execute a wrapper command on a result value of a tested dialog command
-- ```ExtAttrCheck``` - read an external attribute value defined outside the dialog 
+- ```ExtAttrCheck``` - read an external attribute value defined outside the dialog
 - ```ExtCmdCheck``` - execute an external command defined outside the dialog and read its result value
+  
 classes
 3. starts event loop and performs checkes with ```executeChecks()``` or  ```executeChecksAndClose()``` method
 4. compare results by reading ```results``` attribute of executing
 
-for example   
+for example
 
 .. code-block:: python
 
@@ -46,7 +48,7 @@ for example
         qtck.setChecks([
 	    # read return value of execute isConnected command
             qtchecker.CmdCheck(
-	        # a python path to a method executed in the first action 
+	        # a python path to a method executed in the first action
 	        "_MainWindow__lavue._LiveViewer__sourcewg.isConnected"
             ),
 	    # click pushButton with the left-mouse-click
@@ -81,9 +83,10 @@ for example
 	)
 
 More examples can be found at like `LavueTests
-<https://github.com/jkotan/lavue/blob/develop/test/CommandLineArgument_test.py/>`_  `LavueStateTests
+<https://github.com/jkotan/lavue/blob/develop/test/CommandLineArgument_test.py/>`_
+or `LavueStateTests
 <https://github.com/jkotan/lavue/blob/develop/test/CommandLineLavueState_test.py/>`_.
-	
+
 Installation
 ------------
 
