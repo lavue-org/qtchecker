@@ -324,7 +324,7 @@ class QtChecker(object):
         :type delay: :obj:`int`
         """
         self.__results = []
-        self.QtCore.QTimer.singleShot(1000, self._executeChecksAndClose)
+        self.QtCore.QTimer.singleShot(delay, self._executeChecksAndClose)
         status = self.__app.exec_()
         if self.__verbose:
             print("Status %s" % status)
@@ -337,7 +337,7 @@ class QtChecker(object):
         :type delay: :obj:`int`
         """
         self.__results = []
-        self.QtCore.QTimer.singleShot(1000, self._executeChecks)
+        self.QtCore.QTimer.singleShot(delay, self._executeChecks)
         status = self.__app.exec_()
         if self.__verbose:
             print("Status %s" % status)
@@ -363,6 +363,7 @@ class QtChecker(object):
             self.QtCore.QCoreApplication.processEvents()
             if self.__sleep:
                 QtTest.QTest.qWait(self.__sleep)
+            self.QtCore.QCoreApplication.processEvents()
 
     def compareResults(self, testcase, results, mask=None):
         """ compare results with use of testcase.assertEqual
