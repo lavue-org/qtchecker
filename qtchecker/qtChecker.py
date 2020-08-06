@@ -104,6 +104,8 @@ class CmdCheck(Check):
         :type path: :obj:`str`
         :param params: a list of wrapper parameters
         :type params: :obj:`dict` <:obj:`str`, :obj:`any`>
+            or :obj:`list` <:obj:`any`>
+            or (:obj:`list` <:obj:`any`>, :obj:`dict` <:obj:`str`, :obj:`any`>)
         """
         self._params = params
 
@@ -116,7 +118,12 @@ class CmdCheck(Check):
         parent = self._getparent(dialog)
         cmd = getattr(parent, self._item)
         if self._params:
-            return cmd(**self._params)
+            if isinstance(self._params, dict):
+                return cmd(**self._params)
+            elif isinstance(self._params, tuple) and len(self._params) == 2:
+                return cmd(*self._params[0], **self._params[1])
+            else:
+                return cmd(*self._params)
         else:
             return cmd()
 
@@ -133,6 +140,8 @@ class WrapCmdCheck(Check):
         :type path: :obj:`str`
         :param params: a list of wrapper parameters or None
         :type params: :obj:`dict` <:obj:`str`, :obj:`any`>
+            or :obj:`list` <:obj:`any`>
+            or (:obj:`list` <:obj:`any`>, :obj:`dict` <:obj:`str`, :obj:`any`>)
         :param wcmd: wcmd command
         :type wcmd: :obj:`func`
         :param wparams: a list of wrapper parameters

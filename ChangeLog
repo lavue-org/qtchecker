@@ -1,3 +1,7 @@
+2020-08-06 Jan Kotanski <jan.kotanski@desy.de>
+	* extend params type of CmdCheck
+	* tagged as 0.2.0
+
 2020-07-09 Jan Kotanski <jan.kotanski@desy.de>
 	* fix for checker delay
 	* tagged as 0.1.2
