@@ -359,6 +359,7 @@ class QtChecker(object):
         status = self.__app.exec_()
         for timer in self.__timers:
             timer.stop()
+            timer.deleteLater()
         self.__timers.clear()
         if self.__verbose:
             print("Status %s" % status)
