@@ -352,13 +352,14 @@ class QtChecker(object):
             print("Set Timer: %s" % delay)
         # self.QtCore.QTimer.singleShot(delay, self._executeChecksAndClose)
         timer = self.QtCore.QTimer(self.__dialog)
-        timer.singleShot(True)
+        timer.setSingleShot(True)
         timer.timeout.connect(self._executeChecksAndClose)
         timer.start(delay)
         self.__timers.append(timer)
         status = self.__app.exec_()
         for timer in self.__timers:
             timer.stop()
+        self.__timers.clear()
         if self.__verbose:
             print("Status %s" % status)
         return status
@@ -374,7 +375,7 @@ class QtChecker(object):
             print("Set Timer: %s" % delay)
         # self.QtCore.QTimer.singleShot(delay, self._executeChecks)
         timer = self.QtCore.QTimer(self.__dialog)
-        timer.singleShot(True)
+        timer.setSingleShot(True)
         timer.timeout.connect(self._executeChecks)
         timer.start(delay)
         self.__timers.append(timer)
