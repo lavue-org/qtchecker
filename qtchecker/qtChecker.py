@@ -42,6 +42,15 @@ else:
 """ qt checker for testing gui """
 
 
+class NullWrapper(object):
+
+    def __enter__(self):
+        pass
+
+    def __exit__(self, type, value, traceback):
+        pass
+
+
 class Check(object):
     """ abstract check class
     """
@@ -271,7 +280,7 @@ class WrapAttrCheck(AttrCheck):
 class QtChecker(object):
 
     def __init__(self, app=None, dialog=None, verbose=False,
-                 qtgui=None, qtcore=None, qttest=None, sleep=0):
+                 qtgui=None, qtcore=None, qttest=None, sleep=0, withitem=None):
         """ constructor
 
         :param app:  application object
@@ -288,6 +297,8 @@ class QtChecker(object):
         :type qttest:  :obj:`any`
         :param sleep: sleep time in ms
         :type sleep: :obj:`int`
+        :param withitem: with_item wrapper executed around checks
+        :type withitem: :obj:`int`
         """
         self.QtGui = qtgui or QtGui
         self.QtCore = qtcore or QtCore
@@ -301,6 +312,8 @@ class QtChecker(object):
         self.__results = []
         self.__verbose = verbose
         self.__sleep = sleep
+        self.__wrapper = withitem or NullWrapper
+        self.__timers = []
 
     def setDialog(self, dialog):
         """ sets dialog
@@ -337,8 +350,15 @@ class QtChecker(object):
         self.__results = []
         if self.__verbose:
             print("Set Timer: %s" % delay)
-        self.QtCore.QTimer.singleShot(delay, self._executeChecksAndClose)
+        # self.QtCore.QTimer.singleShot(delay, self._executeChecksAndClose)
+        timer = self.QtCore.QTimer(self.__dialog)
+        timer.singleShot(True)
+        timer.timeout.connect(self._executeChecksAndClose)
+        timer.start(delay)
+        self.__timers.append(timer)
         status = self.__app.exec_()
+        for timer in self.__timers:
+            timer.stop()
         if self.__verbose:
             print("Status %s" % status)
         return status
@@ -352,7 +372,12 @@ class QtChecker(object):
         self.__results = []
         if self.__verbose:
             print("Set Timer: %s" % delay)
-        self.QtCore.QTimer.singleShot(delay, self._executeChecks)
+        # self.QtCore.QTimer.singleShot(delay, self._executeChecks)
+        timer = self.QtCore.QTimer(self.__dialog)
+        timer.singleShot(True)
+        timer.timeout.connect(self._executeChecks)
+        timer.start(delay)
+        self.__timers.append(timer)
 
     def execute(self):
         """ executes application event loop
@@ -368,14 +393,21 @@ class QtChecker(object):
     def _executeChecksAndClose(self):
         """ executes check items and close the dialog
         """
-        self._executeChecks()
-        if self.__dialog:
-            self.__dialog.close()
-            if self.__verbose:
-                print("Close Dialog")
-            self.__dialog = None
+        with self.__wrapper():
+            self._executeChecksImp()
+            if self.__dialog:
+                self.__dialog.close()
+                if self.__verbose:
+                    print("Close Dialog")
+                self.__dialog = None
 
     def _executeChecks(self):
+        """ executes check items and close the dialog
+        """
+        with self.__wrapper():
+            self._executeChecksImp()
+
+    def _executeChecksImp(self):
         """ executes check items
         """
         for i, ch in enumerate(self.__checks):

@@ -1,3 +1,7 @@
+2020-10-16 Jan Kotanski <jan.kotanski@desy.de>
+	* add with item wrapper
+	* tagged as 0.3.0
+
 2020-08-06 Jan Kotanski <jan.kotanski@desy.de>
 	* extend params type of CmdCheck
 	* tagged as 0.2.0
