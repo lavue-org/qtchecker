@@ -360,7 +360,7 @@ class QtChecker(object):
         for timer in self.__timers:
             timer.stop()
             timer.deleteLater()
-        self.__timers.clear()
+        self.__timers[:] = []
         if self.__verbose:
             print("Status %s" % status)
         return status
