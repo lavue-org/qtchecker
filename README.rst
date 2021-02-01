@@ -24,6 +24,7 @@ With the ``qtchecker`` module its user
 - ``WrapCmdCheck`` - execute a wrapper command on a result value of a tested dialog command
 - ``ExtAttrCheck`` - read an external attribute value defined outside the dialog
 - ``ExtCmdCheck`` - execute an external command defined outside the dialog and read its result value
+- ``AttrChange``  - write a dialog attribute value
   
 3. starts event loop and performs checkes with ``executeChecks()`` or  ``executeChecksAndClose()`` method
 4. compare results by reading ``results`` attribute of executing
