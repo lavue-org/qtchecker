@@ -196,6 +196,26 @@ class AttrCheck(Check):
         parent = self._getparent(dialog)
         return getattr(parent, self._item)
 
+class AttrChange(Check):
+
+    def __init__(self, path, value):
+        Check.__init__(self, path)
+        """ constructor
+
+        :param path: check item path
+        :type path: :obj:`str`
+        """
+        self._value = value
+
+    def execute(self, dialog):
+        """ execute command
+
+        :param dialog: qt dialog
+        :type dialog: :obj:`any`
+        """
+        parent = self._getparent(dialog)
+        setattr(parent, self._item, self._value)
+
 
 class ExtAttrCheck(Check):
 
