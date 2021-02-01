@@ -196,6 +196,7 @@ class AttrCheck(Check):
         parent = self._getparent(dialog)
         return getattr(parent, self._item)
 
+
 class AttrChange(Check):
 
     def __init__(self, path, value):
