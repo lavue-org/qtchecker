@@ -1,6 +1,10 @@
 name: Flake8 Test Package
 
-on: [push, pull_request]
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: '30 0 22 * *'
 
 jobs:
 
