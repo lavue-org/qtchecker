@@ -140,14 +140,15 @@ The ``setup.py`` script may need: ``setuptools  sphinx`` python packages as well
 Debian packages
 """""""""""""""
 
-Debian `buster` and `stretch` or Ubuntu  `focal`, `eoan`, `bionic` packages can be found in the HDRI repository.
+Debian `bullseye` and  `buster` or Ubuntu  `impish`, `focal`, `bionic` packages can be found in the HDRI repository.
 
 To install the debian packages, add the PGP repository key
 
 .. code-block:: console
 
    $ sudo su
-   $ wget -q -O - http://repos.pni-hdri.de/debian_repo.pub.gpg | apt-key add -
+   $ curl -s http://repos.pni-hdri.de/debian_repo.pub.gpg  | gpg --no-default-keyring --keyring gnupg-ring:/etc/apt/trusted.gpg.d/debian-hdri-repo.gpg --import
+   $ chmod 644 /etc/apt/trusted.gpg.d/debian-hdri-repo.gpg
 
 and then download the corresponding source list, e.g.
 
@@ -159,13 +160,13 @@ and
 
 .. code-block:: console
 
-   $ wget http://repos.pni-hdri.de/buster-pni-hdri.list
+   $ wget http://repos.pni-hdri.de/bullseye-pni-hdri.list
 
 or
 
 .. code-block:: console
 
-   $ wget http://repos.pni-hdri.de/stretch-pni-hdri.list
+   $ wget http://repos.pni-hdri.de/buster-pni-hdri.list
 
 or
 
