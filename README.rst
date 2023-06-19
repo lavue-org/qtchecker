@@ -140,7 +140,7 @@ The ``setup.py`` script may need: ``setuptools  sphinx`` python packages as well
 Debian packages
 """""""""""""""
 
-Debian `bullseye` and  `buster` or Ubuntu  `impish`, `focal`, `bionic` packages can be found in the HDRI repository.
+Debian `bookworm`, `bullseye` and  `buster` or Ubuntu  `lunar`, `jammy`, `focal` packages can be found in the HDRI repository.
 
 To install the debian packages, add the PGP repository key
 
@@ -160,7 +160,7 @@ and
 
 .. code-block:: console
 
-   $ wget http://repos.pni-hdri.de/bullseye-pni-hdri.list
+   $ wget http://repos.pni-hdri.de/bookworm-pni-hdri.list
 
 or
 
