@@ -140,7 +140,7 @@ The ``setup.py`` script may need: ``setuptools  sphinx`` python packages as well
 Debian packages
 """""""""""""""
 
-Debian `bookworm`, `bullseye` and  `buster` or Ubuntu  `lunar`, `jammy`, `focal` packages can be found in the HDRI repository.
+Debian `bookworm`, `bullseye` and  `buster` or Ubuntu  `oracular`, `noble`, `jammy` packages can be found in the HDRI repository.
 
 To install the debian packages, add the PGP repository key
 
@@ -172,7 +172,7 @@ or
 
 .. code-block:: console
 
-   $ wget http://repos.pni-hdri.de/focal-pni-hdri.list
+   $ wget http://repos.pni-hdri.de/noble-pni-hdri.list
 
 respectively.
 
@@ -181,14 +181,14 @@ Finally,
 .. code-block:: console
 
    $ apt-get update
-   $ apt-get install python-qtchecker
+   $ apt-get install python3-qtchecker
 
 .. code-block:: console
 
    $ apt-get update
-   $ apt-get install python3-qtchecker
+   $ apt-get install python-qtchecker
 
-for python 3 version.
+for python 2 version.
 
 From pip
 """"""""
