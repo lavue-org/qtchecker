@@ -17,7 +17,7 @@ With the ``qtchecker`` module its user
 
 1. creates ``QtChecker`` object  with the global QApplication object and a given tested QWidget dialog parameters
 2. defines a sequence of checks with ``setChecks()`` method and the following helper classes:
-   
+
 - ``AttrCheck``  - read a tested dialog attribute value
 - ``CmdCheck`` - execute a tested dialog command and read its result value
 - ``WrapAttrCheck`` - execute a wrapper command on a tested dialog attribute
@@ -25,16 +25,16 @@ With the ``qtchecker`` module its user
 - ``ExtAttrCheck`` - read an external attribute value defined outside the dialog
 - ``ExtCmdCheck`` - execute an external command defined outside the dialog and read its result value
 - ``AttrChange``  - write a dialog attribute value
-  
+
 3. starts event loop and performs checkes with ``executeChecks()`` or  ``executeChecksAndClose()`` method
 4. compare results by reading ``results`` attribute of executing
 
 for example
 
 .. code-block:: python
-		
+
     import unittest
-    
+
     from PyQt5 import QtGui
     from PyQt5 import QtCore
     from PyQt5 import QtTest
@@ -44,16 +44,16 @@ for example
     # import my dialog module
     from lavuelib import liveViewer
 
-    
+
     # QApplication object should be one for all tess
     app = QtGui.QApplication([])
 
 
     class GuiTest(unittest.TestCase):
-    
+
         def __init__(self, methodName):
             unittest.TestCase.__init__(self, methodName)
-	    
+
 	def test_run(self):
 
 	    # my tested MainWindow dialog
@@ -106,12 +106,12 @@ for example
 
        def getLavueState(self):
            """ an external command """
-	   
+
            import tango
            return tango.DeviceProxy("po/lavuecontroller/1").LavueState
 
 
-	    
+
 More examples can be found at like `LavueTests
 <https://github.com/jkotan/lavue/blob/develop/test/CommandLineArgument_test.py/>`_
 or `LavueStateTests
@@ -187,18 +187,16 @@ Finally,
 From conda or pip
 """""""""""""""""
 
-
 The code can be installed in your conda environment by
-```
+
 .. code-block:: console
-		
+
    $ conda create -n myenv python=3.13
    $ conda activate myenv
    $ conda config --add channels conda-forge
    $ conda config --set channel_priority strict
 
    $ conda install qtchecker
-```
 
 To install it from pip you need to install pyqt5 in advance, e.g.
 

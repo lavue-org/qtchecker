@@ -1,4 +1,8 @@
 2026-10-16 Jan Kotanski <jan.kotanski@desy.de>
+	* fix typo in README
+	* tagged as 0.5.1
+
+2026-10-16 Jan Kotanski <jan.kotanski@desy.de>
 	* add pyproject.toml
 	* tagged as 0.5.0
 
