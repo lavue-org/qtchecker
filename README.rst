@@ -34,6 +34,7 @@ for example
 .. code-block:: python
 
     import unittest
+    import tango
 
     from PyQt5 import QtGui
     from PyQt5 import QtCore
@@ -46,13 +47,17 @@ for example
 
 
     # QApplication object should be one for all tess
-    app = QtGui.QApplication([])
+    try:
+        app = QtGui.QGuiApplication([])
+    except Exception:
+        app = QtGui.QApplication([])
 
 
     class GuiTest(unittest.TestCase):
 
         def __init__(self, methodName):
             unittest.TestCase.__init__(self, methodName)
+            self.dp = tango.DeviceProxy("po/lavuecontroller/1")
 
 	def test_run(self):
 
@@ -103,12 +108,14 @@ for example
 		    '{"connected": false}'
 		]
 	    )
+            dialog.close()
+            dialog.deleteLater()
+            app.processEvents()
 
-       def getLavueState(self):
-           """ an external command """
+        def getLavueState(self):
+            """ an external command """
 
-           import tango
-           return tango.DeviceProxy("po/lavuecontroller/1").LavueState
+            return self.dp.LavueState
 
 
 
