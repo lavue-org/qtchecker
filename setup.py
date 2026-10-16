@@ -26,6 +26,8 @@
 import codecs
 import os
 from setuptools import setup, find_packages
+from importlib.util import module_from_spec, spec_from_file_location
+from pathlib import Path
 
 try:
     from sphinx.setup_command import BuildDoc
@@ -43,13 +45,19 @@ def read(fname):
         long_description = f.read()
     return long_description
 
-# from sphinx.setup_command import BuildDoc
+
+def get_package():
+    path = Path(__file__).parent / "qtchecker" / "__init__.py"
+    spec = spec_from_file_location("qtchecker", path.as_posix())
+    module = module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
 
 
 #: (:obj:`str`) package name
 NAME = 'qtchecker'
 #: (:obj:`module`) package name
-qtcheckerpackage = __import__(NAME)
+qtcheckerpackage = get_package()
 #: (:obj:`str`) full release version
 release = qtcheckerpackage.__version__
 #: (:obj:`str`) package version
@@ -78,17 +86,20 @@ SETUPDATA = dict(
         'Intended Audience :: Science/Research',
         'Topic :: Scientific/Engineering :: Physics',
         'Topic :: Software Development :: Libraries :: Python Modules',
-        'License :: OSI Approved :: GNU General Public License v2 (GPLv2)',
-        'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6',
-        'Programming Language :: Python :: 3.7',
-        'Programming Language :: Python :: 3.8',
-        'Programming Language :: Python :: 3.9',
+        # 'Programming Language :: Python :: 2.7',
+        # 'Programming Language :: Python :: 3',
+        # 'Programming Language :: Python :: 3.4',
+        # 'Programming Language :: Python :: 3.5',
+        # 'Programming Language :: Python :: 3.6',
+        # 'Programming Language :: Python :: 3.7',
+        # 'Programming Language :: Python :: 3.8',
+        # 'Programming Language :: Python :: 3.9',
         'Programming Language :: Python :: 3.10',
         'Programming Language :: Python :: 3.11',
+        'Programming Language :: Python :: 3.12',
+        'Programming Language :: Python :: 3.13',
+        'Programming Language :: Python :: 3.14',
+        'Programming Language :: Python :: 3.15',
     ],
     keywords='pyqt gui test checker helper',
     packages=find_packages(),
