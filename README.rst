@@ -133,14 +133,14 @@ Extract sources and run
 
 .. code-block:: console
 
-   $ python setup.py install
+   $ python -m pip install . -vv --no-deps --no-build-isolation
 
 The ``setup.py`` script may need: ``setuptools  sphinx`` python packages as well as ``qtbase5-dev-tools`` or ``libqt4-dev-bin``.
 
 Debian packages
 """""""""""""""
 
-Debian `bookworm`, `bullseye` and  `buster` or Ubuntu  `oracular`, `noble`, `jammy` packages can be found in the HDRI repository.
+Debian `trixie', ' bookworm`, `bullseye` or Ubuntu  `resolute`, `noble`, `jammy` packages can be found in the HDRI repository.
 
 To install the debian packages, add the PGP repository key
 
@@ -183,15 +183,22 @@ Finally,
    $ apt-get update
    $ apt-get install python3-qtchecker
 
+
+From conda or pip
+"""""""""""""""""
+
+
+The code can be installed in your conda environment by
+```
 .. code-block:: console
+		
+   $ conda create -n myenv python=3.13
+   $ conda activate myenv
+   $ conda config --add channels conda-forge
+   $ conda config --set channel_priority strict
 
-   $ apt-get update
-   $ apt-get install python-qtchecker
-
-for python 2 version.
-
-From pip
-""""""""
+   $ conda install qtchecker
+```
 
 To install it from pip you need to install pyqt5 in advance, e.g.
 
